@@ -3,6 +3,7 @@ const chalk = require('chalk')
 const express = require('express')
 const webpack = require('webpack')
 const webpackDevServer = require('webpack-dev-server')
+const gameServer = require('./game_server/start')
 
 const routes = require('./routes')
 const { port } = require('./config/index')
@@ -27,6 +28,7 @@ const createServer = () => {
       console.log(
         chalk.bold(chalk.green(`Loopback: ${chalk.blue(`http://localhost:${port}/`)}`))
       )
+      new gameServer()
     }, 1000)
   })
 }
