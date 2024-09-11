@@ -1,3 +1,7 @@
+const ControllerManager = require('../Controller/ControllerManager')
+const TYPES = require('../types')
+
+
 // 记录位置信息
 class Pos {
   constructor() {
@@ -18,11 +22,14 @@ class Client {
     }
     this.pos = new Pos() // 记录位置信息
 
+    this.controllerManager = new ControllerManager(this)
+
+    const self = this
     socket.on('data', function (data) {
       /**
        * 这里接收到客户端发来的信息，根据不同的信息处理对应的逻辑
        */
-      console.log('服务器接收到 : ', data.toString())
+      self.controllerManager.handleRequest(data, self)
     })
 
     socket.on('error', function (e) {
@@ -34,6 +41,20 @@ class Client {
       console.log('结束了')
     })
 
+  }
+
+  // 发送数据给客户端
+  send(returnPack) {
+    try {
+      // 发送JSON数据
+      this.socket.write(JSON.stringify(returnPack))
+    } catch (err) {
+      this.socket.write(JSON.stringify({
+        code: TYPES.ReturnCode.Fail,
+        data: null,
+        msg: JSON.stringify(err)
+      }))
+    }
   }
 }
 
