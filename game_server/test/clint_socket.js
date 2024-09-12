@@ -10,9 +10,10 @@ client.connect(port, host, function () {
   // }, 5000)
   client.write(JSON.stringify({
     requestCode: 1,
-    actionCode: 1,
+    actionCode: 2,
     data: {
-      name: ''
+      name: '',
+      password: ''
     }
   }))
   //向端口写入数据到达服务端

@@ -41,10 +41,10 @@ class ControllerManager extends BaseController {
     if (this.controlDict.get(requestPack.requestCode)) {
       // 2.根据types.js中的ActionCode匹配类中的方法，并且调用，没有则返回错误
       const methodName = Object.keys(this.TYPES.ActionCode).find(key => this.TYPES.ActionCode[key] === requestPack.actionCode)
-      const method = this.controlDict.get(requestPack.requestCode)[methodName]
-      if (method) {
+      const control = this.controlDict.get(requestPack.requestCode)
+      if (control[methodName]) {
         // 3.当获取到此类中有对应的方法时候，则传入client,和requestPack。
-        const pack = method(client, requestPack.data)
+        const pack = control[methodName](client, requestPack)
         if (pack) {
           // 4.如果类中方法返回了ReturnPack，则向客户端发送
           client.send(pack)

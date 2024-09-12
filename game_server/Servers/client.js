@@ -48,6 +48,21 @@ class Client {
       console.log('结束了')
     })
 
+    // 连接5秒后还没有token则销毁当前socket
+    setTimeout(() => {
+      const token = this.user.getToken()
+      if (token == null) {
+        this.close()
+      }
+    }, 5000)
+  }
+
+  getServer() {
+    return this.server
+  }
+
+  getUser() {
+    return this.user
   }
 
   // 检测是否过期连接
@@ -57,7 +72,7 @@ class Client {
     if (now > pingCloseTime + this.pingEndTime) return false
     return true
   }
-  
+
   // 断开连接
   close() {
     this.socket.end()

@@ -28,6 +28,9 @@ class server {
     }, 1000)
   }
 
+  addClientList(client) {
+    this.clientList.push(client)
+  }
 
   deleteClientList(client) {
     this.clientList = this.clientList.filter(c => c !== client)
@@ -52,9 +55,7 @@ class server {
       // 2、我们把独立的socket装进client类中进行处理
       // 3、同时我们把对应的用户信息类也装进去
       const user = new User()
-      const client = new Client(self, user, skt)
-      self.clientList.push(client) // 添加client进入数组
-
+      new Client(self, user, skt)
     })
     this.socket = socket
   }

@@ -22,11 +22,15 @@ module.exports = {
     JsonParseFail: `解析JSON失败`,
     NoCode: `没有匹配的code`,
     NoMethod: `没有匹配的method`,
+    ExitUser: `退出成功`
   },
   ActionCode: {
     ActionNone: 0,
     Logon: 1, // 注册
     Login: 2, // 登录
+    ExitUser: 16, // 退出登录
+
+
     CreateRoom: 3, // 创建房间
     FindRoom: 4, // 查询房间
     PlayerList: 5, // 玩家列表
@@ -35,10 +39,12 @@ module.exports = {
     Chat: 8, // 聊天
     StartGame: 9, // 开始游戏
     Starting: 10, // 服务端发送来的开始游戏指令
+
+
     UpPos: 11, // 更新位置
     ExitGame: 12, // 离开游戏
     UpCharacterList: 13, // 更新角色和玩家列表
     Fire: 14, // 开火
-    Hit: 15 // 击中
+    Hit: 15, // 击中
   }
 }
