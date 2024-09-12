@@ -7,8 +7,30 @@ class server {
     this.HOST = HOST // ip
     this.PORT = PORT // 端口
 
+    this.socket = null
     this.clientList = [] // 装客户端的数组
     this.initSocket()
+    this.loopPing()
+  }
+
+  // 循环=心跳监听
+  loopPing() {
+    setInterval(() => {
+      // 使用filter函数过滤的同时进行赋值，当检测到连接过期时候则断开连接，同时去掉clientList中的失效client
+      this.clientList = this.clientList.filter(c => {
+        if (c.checkedPingExpired()) {
+          return true
+        } else {
+          c.close() // 断开连接
+          return false
+        }
+      })
+    }, 1000)
+  }
+
+
+  deleteClientList(client) {
+    this.clientList = this.clientList.filter(c => c !== client)
   }
 
   /**

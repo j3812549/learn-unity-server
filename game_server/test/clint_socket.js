@@ -6,15 +6,15 @@ var client = new net.Socket()
 client.setEncoding('utf-8')
 //连接到服务端
 client.connect(port, host, function () {
-  setInterval(() => {
-    client.write(JSON.stringify({
-      requestCode: 1,
-      actionCode: 1,
-      data: {
-        name: ''
-      }
-    }))
-  }, 5000)
+  // setInterval(() => {
+  // }, 5000)
+  client.write(JSON.stringify({
+    requestCode: 1,
+    actionCode: 1,
+    data: {
+      name: ''
+    }
+  }))
   //向端口写入数据到达服务端
 })
 client.on('data', function (data) {

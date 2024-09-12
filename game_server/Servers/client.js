@@ -24,11 +24,17 @@ class Client {
 
     this.controllerManager = new ControllerManager(this)
 
+    this.pingEndTime = new Date().getTime() // 每一次心跳的最后时间
+    this.pingCloseMins = 10 // 多少分钟无响应关闭链接
+
     const self = this
     socket.on('data', function (data) {
       /**
        * 这里接收到客户端发来的信息，根据不同的信息处理对应的逻辑
        */
+
+      self.pingEndTime = new Date().getTime() // 更新pingEndTime
+
       self.controllerManager.handleRequest(data, self)
     })
 
@@ -38,9 +44,23 @@ class Client {
     })
 
     socket.on('close', function (data) {
+      self.server.deleteClientList(self)
       console.log('结束了')
     })
 
+  }
+
+  // 检测是否过期连接
+  checkedPingExpired() {
+    const now = new Date().getTime()
+    const pingCloseTime = this.pingCloseMins * 60 * 1000
+    if (now > pingCloseTime + this.pingEndTime) return false
+    return true
+  }
+  
+  // 断开连接
+  close() {
+    this.socket.end()
   }
 
   // 发送数据给客户端
