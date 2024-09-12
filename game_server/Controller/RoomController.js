@@ -5,6 +5,10 @@ class RoomController extends BaseController {
     super()
     this.requestCode = this.TYPES.RequestCode.Room
   }
+
+  CreateRoom(client, requestPack) {
+    return client.getServer().CreateRoom(client, requestPack)
+  }
 }
 
 module.exports = RoomController

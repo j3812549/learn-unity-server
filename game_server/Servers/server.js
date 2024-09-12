@@ -1,6 +1,7 @@
 const net = require('net')
 const User = require('./user')
 const Client = require('./client')
+const Room = require('./room')
 
 class server {
   constructor(HOST, PORT) {
@@ -9,6 +10,9 @@ class server {
 
     this.socket = null
     this.clientList = [] // 装客户端的数组
+    this.roomList = [] // 装房间的数组
+    this.lastRoomId = 0 // 标识id、房间号
+
     this.initSocket()
     this.loopPing()
   }
@@ -34,6 +38,11 @@ class server {
 
   deleteClientList(client) {
     this.clientList = this.clientList.filter(c => c !== client)
+  }
+
+  createRoom(client, requestPack) {
+    this.lastRoomId = this.lastRoomId + 1
+    const room = new Room(this.lastRoomId, this, client)
   }
 
   /**
