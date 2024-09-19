@@ -7,7 +7,7 @@ class RoomController extends BaseController {
   }
 
   CreateRoom(client, requestPack) {
-    return client.getServer().CreateRoom(client, requestPack)
+    return client.getServer().createRoom(client, requestPack)
   }
 }
 

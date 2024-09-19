@@ -1,0 +1,6 @@
+
+登录
+{"requestCode":1,"actionCode":2,"data":{"name":"3131","password":"password"}}
+
+创建房间
+{"requestCode":2,"actionCode":3}

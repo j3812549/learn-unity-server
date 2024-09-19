@@ -43,6 +43,9 @@ class server {
   createRoom(client, requestPack) {
     this.lastRoomId = this.lastRoomId + 1
     const room = new Room(this.lastRoomId, this, client)
+    this.roomList.push(room)
+
+    return requestPack
   }
 
   /**
