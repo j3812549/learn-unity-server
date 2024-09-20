@@ -45,16 +45,25 @@ class ControllerManager extends BaseController {
       if (control[methodName]) {
         // 3.当获取到此类中有对应的方法时候，则传入client,和requestPack。
         const pack = control[methodName](client, requestPack)
-        console.log('==requestPack', requestPack === pack)
+
         if (pack) {
-        
-          // 当返回的pack和requesPack则直接返回成功并且设置data为null
+          const returnPack = new ReturnPack()
+
+          // 统一处理actionCode、requestCode
+          returnPack.actionCode = requestPack.actionCode
+          returnPack.requestCode = requestPack.requestCode
+
           if (requestPack === pack) {
-            
-            return
+            // 当返回的pack和requesPack则直接返回成功并且设置data为null
+            returnPack.code = this.TYPES.ReturnCode.Succeed
+          } else {
+            // 当不为requesPack则将pack对应的值赋值上去
+            returnPack.code = pack.code
+            returnPack.data = pack.data
+            returnPack.msg = pack.msg
           }
           // 4.如果类中方法返回了ReturnPack，则向客户端发送
-          client.send(pack)
+          client.send(returnPack)
         }
         return
       } else {

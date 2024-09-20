@@ -84,6 +84,7 @@ class Client {
       // 发送JSON数据
       this.socket.write(JSON.stringify(returnPack))
     } catch (err) {
+      console.log('err数据错误', err)
       this.socket.write(JSON.stringify({
         code: TYPES.ReturnCode.Fail,
         data: null,

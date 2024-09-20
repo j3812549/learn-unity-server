@@ -4,3 +4,9 @@
 
 创建房间
 {"requestCode":2,"actionCode":3}
+
+查找房间
+{"requestCode":2,"actionCode":4}
+
+加入房间
+{"requestCode":2,"actionCode":6,"data":{"roomId": 1}}

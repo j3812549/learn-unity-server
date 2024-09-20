@@ -8,13 +8,28 @@ class Room {
     this.king = client // 房主
   }
 
-  getRoomInfo () {
+  // 获取房间信息
+  getRoomInfo() {
     return {
       id: this.id,
       count: this.count,
-      maxCount: this.maxCount,
-      king: this.king
+      maxCount: this.maxCount
     }
+  }
+
+  // 加入房间
+  join(client) {
+    if (this.maxCount <= this.count) throw '房间已满'
+    let c = null
+    this.clientList.forEach(item => {
+      if (item === client) c = item
+    })
+
+    if (c) throw '你已经在房间里了'
+
+    this.clientList.push(client)
+    this.count++
+
   }
 }
 

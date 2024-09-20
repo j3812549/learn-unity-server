@@ -35,8 +35,7 @@ class UserController extends BaseController {
   // 退出
   ExitUser(client, requestPack) {
     let returnPack = new ReturnPack()
-    // 把RequestPack中的requestCode和actionCode赋值给returnPack
-    returnPack = Object.assign(returnPack, requestPack, { data: null })
+    
     returnPack.code = this.TYPES.ReturnCode.Succeed
     returnPack.msg = this.TYPES.ReturnMsg.ExitUser
 
