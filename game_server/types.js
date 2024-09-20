@@ -15,14 +15,16 @@ module.exports = {
     ReturnNone: 0,
     Succeed: 1, // 成功
     Fail: 2, // 失败
-    NotRoom: 3 // 没有房间
   },
   // 处理错误响应的文本信息
   ReturnMsg: {
     JsonParseFail: `解析JSON失败`,
     NoCode: `没有匹配的code`,
     NoMethod: `没有匹配的method`,
-    ExitUser: `退出成功`
+    ExitUser: `退出成功`,
+    NoRoomByMax: `房间已满`,
+    Romming: '你已经在房间里了',
+    NoRoom: '房间不存在'
   },
   ActionCode: {
     ActionNone: 0,

@@ -1,3 +1,5 @@
+const TYPES = require('../types')
+
 class Room {
   constructor(id, server, client) {
     this.server = server
@@ -19,13 +21,13 @@ class Room {
 
   // 加入房间
   join(client) {
-    if (this.maxCount <= this.count) throw '房间已满'
+    if (this.maxCount <= this.count) throw TYPES.ReturnMsg.NoRoomByMax
     let c = null
     this.clientList.forEach(item => {
       if (item === client) c = item
     })
 
-    if (c) throw '你已经在房间里了'
+    if (c) throw TYPES.ReturnMsg.Romming
 
     this.clientList.push(client)
     this.count++

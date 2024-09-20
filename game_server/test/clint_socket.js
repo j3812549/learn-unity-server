@@ -12,10 +12,30 @@ client.connect(port, host, function () {
     requestCode: 1,
     actionCode: 2,
     data: {
-      name: '',
+      name: '3131',
       password: ''
     }
   }))
+
+  setTimeout(() => {
+    client.write(JSON.stringify({
+      requestCode: 2,
+      actionCode: 3,
+      data: {
+        roomId: 1,
+      }
+    }))
+  }, 20)
+
+  setTimeout(() => {
+    client.write(JSON.stringify({
+      requestCode: 2,
+      actionCode: 6,
+      data: {
+        roomId: 1,
+      }
+    }))
+  }, 200)
   //向端口写入数据到达服务端
 })
 client.on('data', function (data) {

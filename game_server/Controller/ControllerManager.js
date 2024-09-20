@@ -44,7 +44,14 @@ class ControllerManager extends BaseController {
       const control = this.controlDict.get(requestPack.requestCode)
       if (control[methodName]) {
         // 3.当获取到此类中有对应的方法时候，则传入client,和requestPack。
-        const pack = control[methodName](client, requestPack)
+        let pack = null
+        try {
+          pack = control[methodName](client, requestPack)
+        } catch (err) {
+          pack = new ReturnPack()
+          pack.code = this.TYPES.ReturnCode.Fail
+          pack.msg = typeof err !== 'string' ? err.toString() : err
+        }
 
         if (pack) {
           const returnPack = new ReturnPack()

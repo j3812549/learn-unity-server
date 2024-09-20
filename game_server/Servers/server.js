@@ -44,19 +44,17 @@ class server {
   /**
    * 创建房间
    */
-  createRoom(client, requestPack) {
+  createRoom(client) {
     // 自增lastRoomId，保证不重复
     this.lastRoomId = this.lastRoomId + 1
     const room = new Room(this.lastRoomId, this, client)
     this.roomList.push(room) // 将新建的room装进数组中
-
-    return requestPack
   }
 
   /**
    * 查找房间
    */
-  findRoom(client, requestPack) {
+  findRoom() {
     // 将roomList的数据，并且调用getRoomInfo方法获取房间信息返回
     const resultList = _.cloneDeep(this.roomList).map(room => room.getRoomInfo())
     return resultList
